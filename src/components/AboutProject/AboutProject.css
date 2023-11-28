@@ -8,7 +8,6 @@
   margin: 0 auto;
 }
 
-
 .about-project__title {
   margin: 0;
   color: #FFF;
@@ -91,4 +90,76 @@
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px 121px;
+  }
+
+  .about-project__block {
+    margin: 70px auto 93px;
+    gap: 30px;
+  }
+
+  .about-project__description {
+    max-width: 319px;
+    padding-bottom: 22px;
+  }
+
+  .about-project__description-info {
+    font-size: 12px;
+    line-height: 150%;
+    max-width: 319px;
+  }
+
+  .about-project__timetable-title {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .about-project {
+    padding: 70px 18px 93px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .about-project__block {
+    margin: 60px auto;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .about-project__description {
+    padding-bottom: 16.7px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-project__description-info {
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+
+  .about-project__backend-time {
+    padding: 11px 0;
+    font-size: 11px;
+  }
+
+  .about-project__frontend-time {
+    padding: 11px 0;
+    font-size: 11px;
+  }
+
+  .about-project__timetable-title {
+    padding-top: 10px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: normal;
+  }
 }

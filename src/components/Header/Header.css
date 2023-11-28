@@ -156,7 +156,7 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .header {
     padding: 15px 30px;
   }
@@ -170,7 +170,7 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 435px) {
   .header {
     padding: 18px 10px;
   }
