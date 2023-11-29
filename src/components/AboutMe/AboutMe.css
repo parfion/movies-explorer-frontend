@@ -65,6 +65,7 @@
   font-weight: 500;
   line-height: normal;
   text-decoration: none;
+  width: fit-content;
 }
 
 .about-me__photo {
