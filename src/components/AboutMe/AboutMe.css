@@ -68,6 +68,11 @@
   width: fit-content;
 }
 
+.about-me__link:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
 .about-me__photo {
   min-width: 270px;
   max-height: 327px;

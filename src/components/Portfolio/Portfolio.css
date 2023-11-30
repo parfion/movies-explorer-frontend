@@ -34,6 +34,11 @@
   justify-content: space-between;
 }
 
+.portfolio__link:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
 .portfolio__link-text {
   margin: 0;
   color: #FFF;
