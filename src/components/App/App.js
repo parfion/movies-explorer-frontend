@@ -8,12 +8,14 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 function App() {
   return (
     <div className="app">
       <Header />
       <SearchForm />
+      <MoviesCard />
       {/* <Promo />
       <AboutProject />
       <Techs />
