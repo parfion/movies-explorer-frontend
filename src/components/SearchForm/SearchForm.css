@@ -66,6 +66,7 @@
 }
 
 .search-form__button {
+  cursor: pointer;
   margin-right: 30px;
   margin-left: 30px;
   padding: 0;
@@ -79,6 +80,11 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 163.636%;
+}
+
+.search-form__button:hover {
+  opacity: .7;
+  transition: .2s ease;
 }
 
 .search-form__checkbox {

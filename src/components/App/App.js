@@ -9,13 +9,14 @@ import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function App() {
   return (
     <div className="app">
       <Header />
       <SearchForm />
-      <MoviesCard />
+      <MoviesCardList />
       {/* <Promo />
       <AboutProject />
       <Techs />

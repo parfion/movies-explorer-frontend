@@ -15,7 +15,7 @@ function SearchForm (params) {
         <div className='search-form__bar-options'>
           <div className='search-form__checkbox'>
               <input className='search-form__checkbox-switch' type='checkbox' id="switch"></input>
-              <label className='search-form__checkbox-button' for="switch"></label>
+              <label className='search-form__checkbox-button' htmlFor="switch"></label>
               <p className='search-form__checkbox-text'>Короткометражки</p>
             </div>
         </div>
