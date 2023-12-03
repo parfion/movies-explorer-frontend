@@ -12,13 +12,14 @@ import Movies from '../Movies/Movies';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Profile from '../Profile/Profile';
+import Register from '../Regiter/Register';
 
 function App() {
   return (
     <div className="app">
-      <Header />
+      {/* <Header />
       <Profile />
-      {/* <SearchForm />
+      <SearchForm />
       <Movies />
       <Promo />
       <AboutProject />
@@ -26,6 +27,7 @@ function App() {
       <AboutMe />
       <Portfolio />
       <Footer />  */}
+      <Register />
     </div>
   );
 }

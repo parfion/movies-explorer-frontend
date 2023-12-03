@@ -1,0 +1,169 @@
+.register {
+  min-height: calc(100vh - 70px - 70px);
+  padding: 70px 0px;
+  background-color: #202020;
+}
+
+.register__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 396px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.register__logo {
+  background-image: url('../../images/logo.svg');
+  background-size: cover;
+  max-width: 38px;
+  min-height: 38px;
+}
+
+.register__logo:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
+.register__greet {
+  text-align: left;
+  margin: 40px 0;
+  color: #FFF;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 100%;
+}
+
+.register__form-name {
+  margin: 0;
+  text-align: left;
+  padding-bottom: 5px;
+  color: #8B8B8B;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.register__form-data {
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background: initial;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #424242;
+}
+
+.register__span {
+  min-height: 18px;
+}
+
+.register__form-error {
+  display: block;
+  margin: 0;
+  text-align: left;
+  padding-top: 6px;
+  color: #EE3465;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.register__form-submit {
+  cursor: pointer;
+  margin-top: 134px;
+  border: 0;
+  padding: 0;
+  min-height: 45px;
+  border-radius: 3px;
+  background: #4285F4;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.register__form-submit:disabled {
+  opacity: .7;
+}
+
+.register__yet {
+  margin: 0;
+  padding-top: 16px;
+  color: #8B8B8B;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.register__link {
+  padding-left: 6px;
+  text-decoration: none;
+  color: #4285F4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.register__link:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .register {
+    min-height: calc(100vh - 232px - 232px);
+    padding: 232px 30px;
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .register {
+    min-height: calc(100vh - 56px - 30px);
+    padding: 56px 30px 30px;
+  }
+
+  .register__content {
+    align-items: center;
+  }
+
+  .register__logo {
+    width: 100%;
+  }
+
+  .register__greet {
+    text-align: left;
+    margin: 50px 0 80px;
+  }
+
+  .register__form-data {
+    font-weight: 400;
+  }
+
+  .register__form-submit {
+    margin-top: 222px;
+    font-size: 12px;
+  }
+
+  .register__yet {
+    padding-top: 16px;
+    font-size: 12px;
+  }
+
+  .register__link {
+    padding-left: 7px;
+    font-size: 12px;
+  }
+}

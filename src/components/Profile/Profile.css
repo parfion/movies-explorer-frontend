@@ -1,7 +1,7 @@
 .profile {
   min-height: calc(100vh - 74px - 74px - 70px);
   padding: 74px 0px 70px;
-  background-color: #272727;
+  background-color: #202020;
 }
 
 .profile__content {
@@ -77,6 +77,11 @@
   font-size: 13px;
   font-weight: 500;
   line-height: normal;
+}
+
+.profile__exit:hover {
+  opacity: .7;
+  transition: .2s ease;
 }
 
 @media screen and (max-width: 768px) {
