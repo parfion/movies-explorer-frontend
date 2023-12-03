@@ -8,21 +8,24 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
+import Movies from '../Movies/Movies';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <SearchForm />
-      <MoviesCardList />
-      {/* <Promo />
+      <Profile />
+      {/* <SearchForm />
+      <Movies />
+      <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
-      <Portfolio /> */}
-      <Footer />
+      <Portfolio />
+      <Footer />  */}
     </div>
   );
 }

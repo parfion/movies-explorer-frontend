@@ -17,7 +17,7 @@
 }
 
 .movie-cardlist__button {
-  padding: 0 auto;
+  padding: 0;
   cursor: pointer;
   display: block;
   margin: 50px auto 0;
@@ -67,5 +67,9 @@
 @media screen and (max-width: 435px) {
   .movie-cardlist {
     padding: 50px 0px;
+  }
+
+  .movie-cardlist__button {
+    width: 240px;
   }
 }
