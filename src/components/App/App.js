@@ -14,6 +14,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Profile from '../Profile/Profile';
 import Register from '../Regiter/Register';
 import Login from '../Login/Login';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -28,8 +29,9 @@ function App() {
       <AboutMe />
       <Portfolio />
       <Footer /> 
-      <Register /> */}
-      <Login />
+      <Register />
+      <Login /> */}
+      <NotFound />
     </div>
   );
 }
