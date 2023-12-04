@@ -15,6 +15,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Regiter/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   return (
@@ -30,8 +31,9 @@ function App() {
       <Portfolio />
       <Footer /> 
       <Register />
-      <Login /> */}
-      <NotFound />
+      <Login />
+      <NotFound /> */}
+      <Preloader /> 
     </div>
   );
 }
