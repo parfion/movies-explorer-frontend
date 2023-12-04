@@ -13,6 +13,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Profile from '../Profile/Profile';
 import Register from '../Regiter/Register';
+import Login from '../Login/Login';
 
 function App() {
   return (
@@ -26,8 +27,9 @@ function App() {
       <Techs />
       <AboutMe />
       <Portfolio />
-      <Footer />  */}
-      <Register />
+      <Footer /> 
+      <Register /> */}
+      <Login />
     </div>
   );
 }
