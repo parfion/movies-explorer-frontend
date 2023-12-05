@@ -1,9 +1,13 @@
 import './Footer.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Footer (params) {
+  const { pathname } = useLocation();
+
+  const showFooter = () => pathname === '/' || pathname === '/movies' || pathname === '/saved-movies';
+
   return(
-    <footer className='footer'>
+    <footer className={showFooter() ? 'footer' : 'footer-none'}>
       <div className='footer__content'>
         <h2 className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h2>
         <div className='footer__info'>

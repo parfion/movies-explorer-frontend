@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Regiter/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
       </Routes>
       <Footer />
     </div>
-  );
+  )
 }
 
 export default App;

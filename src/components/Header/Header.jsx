@@ -73,11 +73,15 @@ function Header(params) {
           <nav className='header__popup'>
             <button className='header__popup-close' onClick={closePopup}></button>
             <nav className='header__popup-menu'>
-              <Link className={pathname === '/' ? 'header__link-active' : 'header__link-menu'} to='/'>Главная</Link>
-              <Link className={pathname === '/movies' ? 'header__link-active' : 'header__link-menu'} to='/movies'>Фильмы</Link>
-              <Link className={pathname === '/saved-movies' ? 'header__link-active' : 'header__link-menu'} to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className={pathname === '/' ? 'header__link-active' : 'header__link-menu'} 
+              to='/' onClick={closePopup}>Главная</Link>
+              <Link className={pathname === '/movies' ? 'header__link-active' : 'header__link-menu'} 
+              to='/movies'  onClick={closePopup}>Фильмы</Link>
+              <Link className={pathname === '/saved-movies' ? 'header__link-active' : 'header__link-menu'} 
+              to='/saved-movies' onClick={closePopup}>Сохранённые фильмы</Link>
             </nav>
-            <Link className='header__link header__link-account header__link-account-menu' to='#'>
+            <Link className='header__link header__link-account header__link-account-menu' 
+            to='/profile'  onClick={closePopup}>
               <p className='header__nav-account'>Аккаунт</p>
               <div className='header__nav-img'></div>
             </Link>

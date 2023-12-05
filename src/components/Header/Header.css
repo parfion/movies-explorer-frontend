@@ -167,6 +167,11 @@
   border-bottom: 2px solid transparent;
 }
 
+.header__link-menu:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
 .header__link-active {
   text-decoration: none;
   color: #FFF;
