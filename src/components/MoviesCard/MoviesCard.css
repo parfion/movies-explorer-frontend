@@ -31,6 +31,7 @@
 }
 
 .movies-card__like {
+  padding: 0;
   cursor: pointer;
   border: 0;
   background: #313131 url('../../images/like.svg') no-repeat center;
@@ -47,6 +48,22 @@
 .movies-card__like:hover {
   opacity: .7;
   transition: .2s ease;
+}
+
+.movies-card__delete {
+  cursor: pointer;
+  padding: 0;
+  opacity: 0;
+  border: 0;
+  background: #313131 url('../../images/closeIcon.svg') no-repeat center;
+  background-size: 9px 9px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.movies-card__delete:hover {
+  opacity: 1;
 }
 
 .movies-card__timing {

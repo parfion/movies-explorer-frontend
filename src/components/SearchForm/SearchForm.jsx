@@ -3,7 +3,7 @@ import loupe from '../../images/loupe.svg';
 
 function SearchForm (params) {
   return(
-    <div className='search-form'>
+    <section className='search-form'>
       <div className='search-form__content'>
         <form className='search-form__bar'>
           <img className='search-form__info-img' alt='Лупа' src={loupe} />
@@ -20,7 +20,7 @@ function SearchForm (params) {
             </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

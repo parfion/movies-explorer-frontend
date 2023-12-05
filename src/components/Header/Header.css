@@ -152,7 +152,7 @@
   padding-top: 159px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 22px;
   align-items: center;
 }
 
@@ -163,6 +163,19 @@
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.header__link-active {
+  text-decoration: none;
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #fff;
 }
 
 .header__link-account-menu {
@@ -190,16 +203,24 @@
   }
 
   .header__nav {
-    gap: 14px;
+    gap: 15px;
   }
 
   .header__link {
     font-size: 10px;
     line-height: 160%;
+    padding-bottom: 7px;
   }
 
   .header__signin {
     padding: 5px 12px;
     background-color: #3DDC84;
+  }
+
+  .header__link-active {
+    font-size: 10px;
+    line-height: 160%;
+    padding-bottom: 7px;
+    border-bottom: 4px;
   }
 }

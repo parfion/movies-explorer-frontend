@@ -15,7 +15,7 @@ function Header(params) {
   const loggedOutHeader = () => pathname === '/';
 
 
-  const loggedInHeader =() => pathname === '/profile' || '/movies' || '/saved-movies';
+  const loggedInHeader = () => pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies';
 
   const openPopup = () => {
     document.querySelector('.header__popup').classList.add('header__popup-opened')
@@ -73,9 +73,9 @@ function Header(params) {
           <nav className='header__popup'>
             <button className='header__popup-close' onClick={closePopup}></button>
             <nav className='header__popup-menu'>
-              <Link className='header__link-menu' to='/'>Главная</Link>
-              <Link className='header__link-menu' to='/movies'>Фильмы</Link>
-              <Link className='header__link-menu' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className={pathname === '/' ? 'header__link-active' : 'header__link-menu'} to='/'>Главная</Link>
+              <Link className={pathname === '/movies' ? 'header__link-active' : 'header__link-menu'} to='/movies'>Фильмы</Link>
+              <Link className={pathname === '/saved-movies' ? 'header__link-active' : 'header__link-menu'} to='/saved-movies'>Сохранённые фильмы</Link>
             </nav>
             <Link className='header__link header__link-account header__link-account-menu' to='#'>
               <p className='header__nav-account'>Аккаунт</p>

@@ -15,7 +15,7 @@ function Profile (params) {
   };
 
   return (
-    <div className='profile'>
+    <section className='profile'>
       <div className='profile__content'>
         <h2 className='profile__greet'>Привет, Виталий!</h2>
         <div className='profile__info'>
@@ -31,7 +31,7 @@ function Profile (params) {
         <button className='profile__edit'>Редактировать</button>
         <Link className='profile__exit' to='#'>Выйти из аккаунта</Link>
       </div>
-    </div>
+    </section>
   )
 };
 

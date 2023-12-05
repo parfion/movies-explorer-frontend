@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function NotFound (params) {
   return (
-    <div>
+    <section>
       <div className='not-found register'>
         <div className='register__content'>
           <h2 className='not-found__title'>404</h2>
@@ -11,7 +11,7 @@ function NotFound (params) {
           <Link className='not-found__link register__link' to='#'>Назад</Link>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

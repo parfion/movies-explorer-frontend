@@ -30,7 +30,7 @@ function Login (params) {
   };
 
   return (
-    <div className='register'>
+    <section className='register'>
       <div className='register__content'>
         <Link className='register__logo' to='/'></Link>
         <h2 className='register__greet'>Рады видеть!</h2>
@@ -66,7 +66,7 @@ function Login (params) {
         <p className='register__yet'>Ещё не зарегистрированы?
         <Link className='register__link' to='/signup'>Зарегистрироваться</Link></p>
       </div>
-    </div>
+    </section>
   )
 };
 

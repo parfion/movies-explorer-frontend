@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Portfolio (params) {
   return(
-    <div className='portfolio'>
+    <section className='portfolio'>
       <div className='portfolio__content'>
         <h2 className='portfolio__title'>Портфолио</h2>
         <div className='portfolio__links'>
@@ -21,7 +21,7 @@ function Portfolio (params) {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   )
 };
 
