@@ -3,6 +3,10 @@
   background-color: #073042;
 }
 
+.header-signin {
+  background-color: #202020;
+}
+
 .header__content {
   margin: 0 auto;
   align-items: center;

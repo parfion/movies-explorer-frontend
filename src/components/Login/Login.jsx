@@ -32,7 +32,7 @@ function Login (params) {
   return (
     <div className='register'>
       <div className='register__content'>
-        <Link className='register__logo' to='#'></Link>
+        <Link className='register__logo' to='/'></Link>
         <h2 className='register__greet'>Рады видеть!</h2>
         <form className='register__form' onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -64,7 +64,7 @@ function Login (params) {
           <button className='register__form-submit' type='submit' disabled={!isValid}>Войти</button>
         </form>
         <p className='register__yet'>Ещё не зарегистрированы?
-        <Link className='register__link' to='#'>Зарегистрироваться</Link></p>
+        <Link className='register__link' to='/signup'>Зарегистрироваться</Link></p>
       </div>
     </div>
   )

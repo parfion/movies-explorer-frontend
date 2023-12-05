@@ -39,7 +39,7 @@ function Register (params) {
   return (
     <div className='register'>
       <div className='register__content'>
-        <Link className='register__logo' to='#'></Link>
+        <Link className='register__logo' to='/'></Link>
         <h2 className='register__greet'>Добро пожаловать!</h2>
         <form className='register__form' onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -84,7 +84,7 @@ function Register (params) {
           <button className='register__form-submit' type='submit' disabled={!isValid}>Зарегистрироваться</button>
         </form>
         <p className='register__yet'>Уже зарегистрированы?
-        <Link className='register__link' to='#'>Войти</Link></p>
+        <Link className='register__link' to='/signin'>Войти</Link></p>
       </div>
     </div>
   )

@@ -1,38 +1,70 @@
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 function Header(params) {
+  const { pathname } = useLocation();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  function openPopup () {
+  const resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  
+  window.addEventListener('resize', resizeWindow);
+
+  const loggedOutHeader = () => pathname === '/';
+
+
+  const loggedInHeader =() => pathname === '/profile' || '/movies' || '/saved-movies';
+
+  const openPopup = () => {
     document.querySelector('.header__popup').classList.add('header__popup-opened')
   }; 
 
-  function closePopup () {
+  const closePopup = () => {
     document.querySelector('.header__popup').classList.remove('header__popup-opened')
   };
 
-  return(
+  return (
     <>
-      {/* <header className='header'>
-        <div className='header__content'>
-          <Link className='header__logo' to='#'></Link>
-          <nav className='header__nav'>
-            <Link className='header__link' to='#'>Регистрация</Link>
-            <Link className='header__link header__signin' to='#'>Войти</Link>
-          </nav>
-        </div>
-      </header> */}
-
+      { loggedOutHeader() && (
       <header className='header'>
         <div className='header__content'>
-          <Link className='header__logo header__logo-admin' to='#'></Link>
+          <Link className='header__logo' to='/'></Link>
+          <nav className='header__nav'>
+            <Link className='header__link' to='/signup'>Регистрация</Link>
+            <Link className='header__link header__signin' to='/signin'>Войти</Link>
+          </nav>
+        </div>
+      </header> )}
+
+      { loggedInHeader() && windowWidth > 768 && (
+      <header className='header header-signin'>
+        <div className='header__content'>
+          <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
             <div className='header__nav-movies'>
-              <Link className='header__link' to='#'>Фильмы</Link>
-              <Link className='header__link' to='#'>Сохранённые фильмы</Link>
+              <Link className='header__link' to='/movies'>Фильмы</Link>
+              <Link className='header__link' to='/saved-movies'>Сохранённые фильмы</Link>
             </div>
-              <Link className='header__link header__link-account' to='#'>
+              <Link className='header__link header__link-account' to='/profile'>
+                <p className='header__nav-account'>Аккаунт</p>
+                <div className='header__nav-img'></div>
+              </Link>
+          </nav>
+        </div>
+      </header> )}
+
+      { loggedInHeader() && windowWidth <= 768 && (
+      <header className='header header-signin'>
+        <div className='header__content'>
+          <Link className='header__logo header__logo-admin' to='/'></Link>
+          <nav className='header__nav-admin'>
+            <div className='header__nav-movies'>
+              <Link className='header__link' to='/movies'>Фильмы</Link>
+              <Link className='header__link' to='/saved-movies'>Сохранённые фильмы</Link>
+            </div>
+              <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
                 <div className='header__nav-img'></div>
               </Link>
@@ -41,9 +73,9 @@ function Header(params) {
           <nav className='header__popup'>
             <button className='header__popup-close' onClick={closePopup}></button>
             <nav className='header__popup-menu'>
-              <Link className='header__link-menu' to='#'>Главная</Link>
-              <Link className='header__link-menu' to='#'>Фильмы</Link>
-              <Link className='header__link-menu' to='#'>Сохранённые фильмы</Link>
+              <Link className='header__link-menu' to='/'>Главная</Link>
+              <Link className='header__link-menu' to='/movies'>Фильмы</Link>
+              <Link className='header__link-menu' to='/saved-movies'>Сохранённые фильмы</Link>
             </nav>
             <Link className='header__link header__link-account header__link-account-menu' to='#'>
               <p className='header__nav-account'>Аккаунт</p>
@@ -51,7 +83,7 @@ function Header(params) {
             </Link>
           </nav>
         </div>
-      </header>
+      </header> )}
     </>
   )
 }
