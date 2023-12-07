@@ -37,7 +37,7 @@
 .header__link {
   text-decoration: none;
   color: #FFF;
-  font-size: 12px;
+  font-size: 12.5px;
   font-style: normal;
   font-weight: 500;
   line-height: 133.333%;
@@ -62,7 +62,7 @@
 }
 
 .header__logo-admin {
-  margin-right: 35px;
+  margin-right: 47px;
 }
 
 .header__nav-admin {
@@ -95,6 +95,15 @@
   min-width: 26px;
   min-height: 26px;
 }
+
+.header__nav-img-admin {
+  background: #313131 url('../../images/accountIcon.svg') no-repeat center;
+  border-radius: 50%;
+  min-width: 26px;
+  min-height: 26px;
+}
+
+
 
 .header__menu-img {
   display: none;

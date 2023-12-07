@@ -1,4 +1,5 @@
 import '../Regiter/Register.css';
+import './Login.css';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -61,10 +62,10 @@ function Login (params) {
             <div className='register__span'>{errors?.passwordLogin && <p className='register__form-error'>{
             errors?.passwordLogin?.message || 'Что-то пошло не так...'}</p>}</div>
           </div>
-          <button className='register__form-submit' type='submit' disabled={!isValid}>Войти</button>
+          <button className='register__form-submit register__form-submit-auth' type='submit' disabled={!isValid}>Войти</button>
         </form>
         <p className='register__yet'>Ещё не зарегистрированы?
-        <Link className='register__link' to='/signup'>Зарегистрироваться</Link></p>
+        <Link className='register__link' to='/signup'>Регистрация</Link></p>
       </div>
     </section>
   )

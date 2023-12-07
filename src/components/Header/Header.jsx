@@ -49,7 +49,7 @@ function Header(params) {
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
-                <div className='header__nav-img'></div>
+                <div className='header__nav-img-admin'></div>
               </Link>
           </nav>
         </div>

@@ -1,6 +1,6 @@
 .not-found {
-  min-height: calc(100vh - 236px - 60px);
-  padding: 236px 0px 60px;
+  min-height: calc(100vh - 245px - 60px);
+  padding: 245px 0px 60px;
   background-color: #202020;
 }
 
