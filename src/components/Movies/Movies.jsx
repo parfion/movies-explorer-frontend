@@ -3,10 +3,10 @@ import SearchForm from "../SearchForm/SearchForm";
 
 function Movies (params) {
   return (
-    <>
+    <main>
       <SearchForm />
       <MoviesCardList />
-    </>
+    </main>
   )
 }
 

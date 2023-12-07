@@ -15,23 +15,25 @@ function Profile (params) {
   };
 
   return (
-    <section className='profile'>
-      <div className='profile__content'>
-        <h2 className='profile__greet'>Привет, Виталий!</h2>
-        <div className='profile__info'>
-          <div className='profile__info-name'>
-            <p className='profile__info-text'>Имя</p>
-            <input className='profile__info-data' type='text' onChange={changeName} value={name || ''}></input>
+    <main>
+      <section className='profile'>
+        <div className='profile__content'>
+          <h1 className='profile__greet'>Привет, Виталий!</h1>
+          <div className='profile__info'>
+            <div className='profile__info-name'>
+              <p className='profile__info-text'>Имя</p>
+              <input className='profile__info-data' type='text' onChange={changeName} value={name || ''}></input>
+            </div>
+            <div className='profile__info-email'>
+              <p className='profile__info-text'>E-mail</p>
+              <input className='profile__info-data' type='text' onChange={changeEmail} value={email || ''}></input>
+            </div>
           </div>
-          <div className='profile__info-email'>
-            <p className='profile__info-text'>E-mail</p>
-            <input className='profile__info-data' type='text' onChange={changeEmail} value={email || ''}></input>
-          </div>
+          <button className='profile__edit'>Редактировать</button>
+          <Link className='profile__exit' to='/'>Выйти из аккаунта</Link>
         </div>
-        <button className='profile__edit'>Редактировать</button>
-        <Link className='profile__exit' to='#'>Выйти из аккаунта</Link>
-      </div>
-    </section>
+      </section>
+    </main>
   )
 };
 

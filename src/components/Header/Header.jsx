@@ -18,11 +18,14 @@ function Header(params) {
   const loggedInHeader = () => pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies';
 
   const openPopup = () => {
-    document.querySelector('.header__popup').classList.add('header__popup-opened')
+    document.querySelector('.header__popup').classList.add('header__popup-opened');
+    document.querySelector('.header__opacity').classList.add('header__opacity-opened')
+
   }; 
 
   const closePopup = () => {
     document.querySelector('.header__popup').classList.remove('header__popup-opened')
+    document.querySelector('.header__opacity').classList.remove('header__opacity-opened')
   };
 
   return (
@@ -70,6 +73,7 @@ function Header(params) {
               </Link>
           </nav>
           <button className='header__menu-img' onClick={openPopup}></button>
+          <div className='header__opacity'>
           <nav className='header__popup'>
             <button className='header__popup-close' onClick={closePopup}></button>
             <nav className='header__popup-menu'>
@@ -86,6 +90,7 @@ function Header(params) {
               <div className='header__nav-img-admin'></div>
             </Link>
           </nav>
+          </div>
         </div>
       </header> )}
     </>

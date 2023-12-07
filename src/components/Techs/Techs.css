@@ -43,6 +43,7 @@
 .techs__used {
   margin: 0 auto;
   padding-top: 100px;
+  padding-left: 0;
   display: flex;
   gap: 10px;
   justify-content: center;

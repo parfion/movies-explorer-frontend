@@ -5,12 +5,12 @@ import './MoviesCardList.css';
 function MoviesCardList (params) {
   const { pathname } = useLocation();
   return (
-    <section className='movie-cardlist movie-cardlist-saved'>
+    <section className={pathname==='/movies' ? 'movie-cardlist' : 'movie-cardlist movie-cardlist-saved'}S>
       <div className='movie-cardlist__content'>
-        <div className='movie-cardlist__cards'>
-          <MoviesCard />
-          <MoviesCard />
-        </div>
+        <nav className='movie-cardlist__cards'>
+          <li className='movie-cardlist__card'><MoviesCard /></li>
+          <li className='movie-cardlist__card'><MoviesCard /></li>
+        </nav>
         {pathname === '/movies' && (
         <button className='movie-cardlist__button'>Ещё</button>
         )}

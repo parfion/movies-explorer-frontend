@@ -9,7 +9,7 @@
 }
 
 .promo__title {
-  margin: 0 auto;
+  margin: 0;
   color: #FFF;
   font-size: 40px;
   font-weight: 400;
@@ -19,7 +19,7 @@
 }
 
 .promo__img {
-  background: url('../../images/promo.svg') no-repeat;
+  background: url('../../images/promo.svg') no-repeat center;
   background-size: cover;
   max-width: 722px;
   height: 244px;
@@ -32,6 +32,10 @@
 @media screen and (max-width: 768px) {
   .promo {
     padding: 300px 44px 70px;
+  }
+
+  .promo__title {
+    margin: auto;
   }
 
   .promo__content {

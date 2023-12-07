@@ -17,6 +17,10 @@
   grid-gap: 38px 20px;
 }
 
+.movie-cardlist__cards {
+  list-style-type: none;
+}
+
 .movie-cardlist__button {
   padding: 0;
   cursor: pointer;
@@ -80,6 +84,7 @@
   }
 
   .movie-cardlist-saved {
+    background-color: #202020;
     padding: 50px 0px 35px;
   }
 

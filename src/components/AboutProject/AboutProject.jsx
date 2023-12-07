@@ -19,11 +19,11 @@ function AboutProject(params) {
         </div>
         <div className='about-project__timetable'>
           <div className='about-project__backend'>
-            <h3 className='about-project__backend-time'>1 неделя</h3>
+            <h4 className='about-project__backend-time'>1 неделя</h4>
             <p className='about-project__timetable-title'>Back-end</p>
           </div>
           <div className='about-project__frontend'>
-            <h3 className='about-project__frontend-time'>4 недели</h3>
+            <h4 className='about-project__frontend-time'>4 недели</h4>
             <p className='about-project__timetable-title'>Front-end</p>
           </div>
         </div>

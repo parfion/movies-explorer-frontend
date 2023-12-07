@@ -7,7 +7,7 @@ function Footer (params) {
   const showFooter = () => pathname === '/' || pathname === '/movies' || pathname === '/saved-movies';
 
   return(
-    <footer className={showFooter() ? 'footer' : 'footer-none'}>
+    <footer className={showFooter() ? 'footer' : 'footer footer-none'}>
       <div className='footer__content'>
         <h2 className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h2>
         <div className='footer__info'>

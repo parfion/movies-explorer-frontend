@@ -4,14 +4,15 @@ import loupe from '../../images/loupe.svg';
 function SearchForm (params) {
   return(
     <section className='search-form'>
+      <form id='search-form'>
       <div className='search-form__content'>
-        <form className='search-form__bar'>
+        <div className='search-form__bar'>
           <img className='search-form__info-img' alt='Лупа' src={loupe} />
           <div className='search-form__info'>
             <input className='search-form__info-input' type='text' placeholder='Фильм' required></input>
             <button className='search-form__button'>Найти</button>
           </div>
-        </form>
+        </div>
         <div className='search-form__bar-options'>
           <div className='search-form__checkbox'>
               <input className='search-form__checkbox-switch' type='checkbox' id="switch"></input>
@@ -20,6 +21,7 @@ function SearchForm (params) {
             </div>
         </div>
       </div>
+      </form>
     </section>
   )
 }
