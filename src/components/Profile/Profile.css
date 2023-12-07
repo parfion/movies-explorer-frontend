@@ -97,11 +97,12 @@
 
 @media screen and (max-width: 435px) {
   .profile {
-    padding: 70px 30px 40px;
+    min-height: calc(100vh - 70px - 74px - 35px);
+    padding: 70px 30px 35px;
   }
 
   .profile__info {
-    margin: 80px auto 379px;
+    margin: 80px auto 375px;
   }
 
   .profile__edit {

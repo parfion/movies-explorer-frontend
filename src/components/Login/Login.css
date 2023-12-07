@@ -1,3 +1,9 @@
 .register__form-submit-auth {
   margin-top: 197px;
 }
+
+@media screen and (max-width: 435px) {
+  .register__form-submit-auth {
+    margin-top: 285px;
+  }
+}

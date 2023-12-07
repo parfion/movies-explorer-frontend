@@ -204,6 +204,16 @@
   }
 
   .search-form__content {
-    padding-bottom: 109px;
+    padding-bottom: 17px;
+  }
+
+  .search-form__bar {
+    margin-bottom: 20px;
+  }
+
+  .search-form__checkbox-text {
+    padding-left: 13px;
+    font-size: 11px;
+    line-height: 163.636%;
   }
 }

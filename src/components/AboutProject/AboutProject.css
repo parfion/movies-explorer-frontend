@@ -127,6 +127,11 @@
     padding: 70px 18px 93px;
   }
 
+  .about-project__backend {
+    width: 44%;
+    height: 34px;
+  }
+
   .about-project__title {
     font-size: 18px;
     letter-spacing: -0.72px;
@@ -150,9 +155,18 @@
     line-height: 145.455%;
   }
 
+  .about-project__timetable {
+    padding-top: 3px;
+    min-height: 34px;
+  }
+
   .about-project__backend-time {
     padding: 11px 0;
     font-size: 11px;
+  }
+
+  .about-project__frontend {
+    height: 34px;
   }
 
   .about-project__frontend-time {

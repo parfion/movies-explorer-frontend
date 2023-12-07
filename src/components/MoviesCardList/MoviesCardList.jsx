@@ -5,10 +5,9 @@ import './MoviesCardList.css';
 function MoviesCardList (params) {
   const { pathname } = useLocation();
   return (
-    <section className='movie-cardlist'>
+    <section className='movie-cardlist movie-cardlist-saved'>
       <div className='movie-cardlist__content'>
         <div className='movie-cardlist__cards'>
-          <MoviesCard />
           <MoviesCard />
           <MoviesCard />
         </div>

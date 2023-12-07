@@ -87,6 +87,11 @@
 }
 
 @media screen and (max-width: 435px) {
+  .movies-card {
+    max-width: calc(100vw - 20px);
+    margin: 0 auto;
+  }
+
   .movies-card__content {
     max-width: 300px;
   }
@@ -94,7 +99,11 @@
   .movies-card__img {
     max-width: 300px;
     height: 168px;
-    margin-bottom: 15px;
+    margin-bottom: 7px;
+  }
+
+  .movies-card__info {
+    padding-bottom: 24px;
   }
 
   .movies-card__name {
