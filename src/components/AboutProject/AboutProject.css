@@ -97,6 +97,10 @@
     padding: 90px 50px 121px;
   }
 
+  .about-project__backend {
+    width: 21%;
+  }
+
   .about-project__block {
     margin: 70px auto 93px;
     gap: 30px;

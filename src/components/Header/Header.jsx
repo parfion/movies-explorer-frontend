@@ -83,7 +83,7 @@ function Header(params) {
             <Link className='header__link header__link-account header__link-account-menu' 
             to='/profile'  onClick={closePopup}>
               <p className='header__nav-account'>Аккаунт</p>
-              <div className='header__nav-img'></div>
+              <div className='header__nav-img-admin'></div>
             </Link>
           </nav>
         </div>

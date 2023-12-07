@@ -53,9 +53,17 @@
 }
 
 @media screen and (max-width: 768px) {
+  .movie-cardlist {
+    min-height: 640px;
+  }
+
   .movie-cardlist__cards {
     grid-template-columns: repeat(2, 339px);
     grid-gap: 30px 30px;
+  }
+
+  .movie-cardlist__button {
+    margin: 60px auto 0;
   }
 }
 

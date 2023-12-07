@@ -11,19 +11,6 @@ function MoviesCardList (params) {
           <MoviesCard />
           <MoviesCard />
           <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
-          <MoviesCard />
         </div>
         {pathname === '/movies' && (
         <button className='movie-cardlist__button'>Ещё</button>

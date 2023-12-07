@@ -86,7 +86,8 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    padding: 236px 30px 269px;
+    min-height: calc(100vh - 236px - 74px - 266px);
+    padding: 236px 30px 266px;
   }
 
   .profile__info {
