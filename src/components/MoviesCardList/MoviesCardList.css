@@ -79,6 +79,11 @@
 }
 
 @media screen and (max-width: 435px) {
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(1, 300px);
+    gap: 34px;
+  }
+
   .movie-cardlist {
     padding: 50px 0px 80px;
   }

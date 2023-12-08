@@ -40,6 +40,13 @@
   justify-content: space-between;
 }
 
+.portfolio__link-item {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .portfolio__link:hover {
   opacity: .7;
   transition: .2s ease;
