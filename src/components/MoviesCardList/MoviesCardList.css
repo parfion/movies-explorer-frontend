@@ -1,0 +1,99 @@
+.movie-cardlist {
+  background-color: #202020;
+  padding: 80px 0px;
+  min-height: 390px;
+}
+
+.movie-cardlist__content {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.movie-cardlist__cards {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 270px);
+  grid-gap: 38px 20px;
+}
+
+.movie-cardlist__cards {
+  list-style-type: none;
+}
+
+.movie-cardlist__button {
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  margin: 55px auto 0;
+  border: none;
+  border-radius: 6px;
+  background: #2F2F2F;
+  width: 320px;
+  height: 36px;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.movie-cardlist__button:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
+@media screen and (max-width: 1275px) {
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(3, 270px);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 995px) {
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(2, 270px);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movie-cardlist {
+    min-height: 640px;
+  }
+
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(2, 339px);
+    grid-gap: 30px 30px;
+  }
+
+  .movie-cardlist__button {
+    margin: 60px auto 0;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(1, 339px);
+    gap: 34px;
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .movie-cardlist__cards {
+    grid-template-columns: repeat(1, 300px);
+    gap: 34px;
+  }
+
+  .movie-cardlist {
+    padding: 50px 0px 80px;
+  }
+
+  .movie-cardlist-saved {
+    background-color: #202020;
+    padding: 50px 0px 35px;
+  }
+
+  .movie-cardlist__button {
+    width: 240px;
+  }
+}
