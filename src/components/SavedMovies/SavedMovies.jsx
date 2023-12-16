@@ -1,11 +1,11 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-function SavedMovies (params) {
+function SavedMovies ({onSubmit, movies}) {
   return (
     <main>
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm onSubmit={onSubmit}/>
+      <MoviesCardList cards={movies}/>
     </main>
   )
 }

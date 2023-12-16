@@ -42,6 +42,17 @@
   transition: .2s ease;
 }
 
+.movie-cardlist__preloader {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-cardlist__error {
+  color: gray;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1275px) {
   .movie-cardlist__cards {
     grid-template-columns: repeat(3, 270px);
