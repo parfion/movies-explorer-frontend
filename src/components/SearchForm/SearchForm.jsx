@@ -1,14 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './SearchForm.css';
 import '../Regiter/Register.css';
 import loupe from '../../images/loupe.svg';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm ({activeCheckbox, handleCheckbox, handleSearchMovie}) {
+
+function SearchForm ({
+    activeCheckbox, 
+    handleCheckbox, 
+    handleSearchMovie, 
+    handleSearcSavedMovies
+  }) {
+    
   const [movieSearch, setMovieSearch] = useState('');
+  const {pathname} = useLocation();
 
-  // отрисовка чекбокса, в зависимости от localStorage
-  let condition 
+  // переменная для отследивания ::checked
+  let condition;
   
   if (activeCheckbox === true) {
     condition = true
@@ -17,13 +27,13 @@ function SearchForm ({activeCheckbox, handleCheckbox, handleSearchMovie}) {
   let searchNameLocalStorage
   if (localStorage.getItem('searchName')) {
     searchNameLocalStorage = JSON.parse(localStorage.getItem('searchName'));
-  }
+  };
 
   useEffect(() => {
     if (localStorage.getItem('searchName')) {
       setMovieSearch(searchNameLocalStorage);
     } 
-  }, [])
+  }, []);
 
   // валидация
   const { 
@@ -35,9 +45,21 @@ function SearchForm ({activeCheckbox, handleCheckbox, handleSearchMovie}) {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    if (pathname === '/movies') {
     handleSearchMovie(movieSearch);
-  } 
+    }
+    else if (pathname === '/saved-movies') {
+      handleSearcSavedMovies(movieSearch)
+    }
+  };
 
+  // очистка инпута для страницы сохраненных фильмов
+  useEffect(() => {
+    if(pathname === '/saved-movies') {
+      setMovieSearch('')
+    }
+  }, [pathname]);
+  
   useEffect(() => {
     const subscription = watch((value) => {
       setMovieSearch(value.movie);
@@ -47,7 +69,7 @@ function SearchForm ({activeCheckbox, handleCheckbox, handleSearchMovie}) {
     })
   }, [watch]);
 
-  function errorSubmit(e) {
+  const errorSubmit = (e) => {
     e.preventDefault();
   };
 
@@ -77,7 +99,14 @@ function SearchForm ({activeCheckbox, handleCheckbox, handleSearchMovie}) {
           </div>
           <div className='search-form__bar-options'>
             <div className='search-form__checkbox'>
-                <input className='search-form__checkbox-switch' onChange={errorSubmit} {...(condition ? {checked: true} : {checked: false})} type='checkbox' id="switch" onClick={handleCheckbox} />
+                <input 
+                  className='search-form__checkbox-switch' 
+                  onChange={errorSubmit} 
+                  {...(condition ? {checked: true} : {checked: false})} 
+                  type='checkbox' 
+                  id="switch" 
+                  onClick={handleCheckbox} 
+                />
                 <label className='search-form__checkbox-button' htmlFor="switch"></label>
                 <p className='search-form__checkbox-text'>Короткометражки</p>
               </div>

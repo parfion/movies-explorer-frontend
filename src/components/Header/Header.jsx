@@ -2,9 +2,12 @@ import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-function Header(params) {
+function Header({ isLoggedIn }) {
+
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const activeHeader = (pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies') && true;
 
   const resizeWindow = () => {
     setWindowWidth(window.innerWidth);
@@ -12,26 +15,20 @@ function Header(params) {
   
   window.addEventListener('resize', resizeWindow);
 
-  const loggedOutHeader = () => pathname === '/';
-
-
-  const loggedInHeader = () => pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies';
-
   const openPopup = () => {
     document.querySelector('.header__popup').classList.add('header__popup-opened');
-    document.querySelector('.header__opacity').classList.add('header__opacity-opened')
-
+    document.querySelector('.header__opacity').classList.add('header__opacity-opened');
   }; 
 
   const closePopup = () => {
-    document.querySelector('.header__popup').classList.remove('header__popup-opened')
-    document.querySelector('.header__opacity').classList.remove('header__opacity-opened')
+    document.querySelector('.header__popup').classList.remove('header__popup-opened');
+    document.querySelector('.header__opacity').classList.remove('header__opacity-opened');
   };
 
   return (
     <>
-      { loggedOutHeader() && (
-      <header className='header'>
+      {(!localStorage.getItem('token') && pathname === '/') && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo' to='/'></Link>
           <nav className='header__nav'>
@@ -41,8 +38,8 @@ function Header(params) {
         </div>
       </header> )}
 
-      { loggedInHeader() && windowWidth > 768 && (
-      <header className='header header-signin'>
+      {(localStorage.getItem('token') && activeHeader && windowWidth > 768) && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
@@ -52,14 +49,14 @@ function Header(params) {
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
-                <div className='header__nav-img-admin'></div>
+                <div className={pathname === '/' ? 'header__nav-img' : 'header__nav-img-admin'}></div>
               </Link>
           </nav>
         </div>
       </header> )}
 
-      { loggedInHeader() && windowWidth <= 768 && (
-      <header className='header header-signin'>
+      { (localStorage.getItem('token') && activeHeader && windowWidth <= 768) && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
@@ -69,7 +66,7 @@ function Header(params) {
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
-                <div className='header__nav-img'></div>
+                <div className={pathname === '/' ? 'header__nav-img' : 'header__nav-img-admin'}></div>
               </Link>
           </nav>
           <button className='header__menu-img' onClick={openPopup}></button>

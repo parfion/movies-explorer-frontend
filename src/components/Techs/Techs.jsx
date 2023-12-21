@@ -1,6 +1,7 @@
 import './Techs.css';
 
 function Techs(params) {
+  
   return(
     <main>
       <section className="techs">
