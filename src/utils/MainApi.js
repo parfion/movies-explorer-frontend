@@ -1,4 +1,4 @@
-const MAIN_URL = 'http://api.movies.parfion.nomoredomainsmonster.ru';
+const MAIN_URL = 'https://api.movies.parfion.nomoredomainsmonster.ru';
 
 const checkResponse = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
