@@ -38,7 +38,7 @@ function Header({ isLoggedIn }) {
         </div>
       </header> )}
 
-      {(localStorage.getItem('token') && activeHeader && windowWidth > 768) && (
+      {(localStorage.getItem('token') && (activeHeader || pathname === '/')  && windowWidth > 768) && (
       <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo header__logo-admin' to='/'></Link>
