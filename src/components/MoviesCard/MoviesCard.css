@@ -2,6 +2,12 @@
   background-color: #202020;
 }
 
+.movies-card:hover {
+  .movies-card__delete {
+    opacity: 1;
+  }
+};
+
 .movies-card__content {
   max-width: 270px;
   margin: 0 auto;
@@ -62,9 +68,9 @@
   height: 24px;
 }
 
-.movies-card__delete:hover {
+/* .movies-card__delete:hover {
   opacity: 1;
-}
+} */
 
 .movies-card__timing {
   margin: 0;
@@ -112,5 +118,9 @@
 
   .movies-card__timing {
     font-size: 10px;
+  }
+
+  .movies-card__delete {
+    opacity: 1;
   }
 }

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-function Login ({ onLogin, errorMessage }) {
+function Login ({ onLogin, errorMessage, isLoading }) {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,6 +48,7 @@ function Login ({ onLogin, errorMessage }) {
                 type='email' 
                 placeholder='E-mail' 
                 value={email}
+                disabled={isLoading}
                 {...register('emailLogin', {
                   required: 'Поле обязательно к заполнению',
                   minLength: {
@@ -76,6 +77,7 @@ function Login ({ onLogin, errorMessage }) {
                 placeholder='Пароль' 
                 autoComplete='off'
                 value={password}
+                disabled={isLoading}
                 {...register('passwordLogin', {
                   required: 'Поле обязательно к заполнению',
                   minLength: {
@@ -92,7 +94,7 @@ function Login ({ onLogin, errorMessage }) {
               errors?.passwordLogin?.message || 'Что-то пошло не так...'}</p>}</div>
             </div>
             <span className='register__form-error'>{errorMessage}</span>
-            <button className='register__form-submit register__form-submit-auth' disabled={!isValid}>Войти</button>
+            <button className='register__form-submit register__form-submit-auth' disabled={!isValid || isLoading}>Войти</button>
           </form>
           <p className='register__yet'>Ещё не зарегистрированы?
           <Link className='register__link' to='/signup'>Регистрация</Link></p>

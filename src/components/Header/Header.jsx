@@ -1,6 +1,6 @@
 import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Header({ isLoggedIn }) {
 
@@ -9,11 +9,14 @@ function Header({ isLoggedIn }) {
 
   const activeHeader = (pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies') && true;
 
-  const resizeWindow = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  
-  window.addEventListener('resize', resizeWindow);
+  useEffect(() => {
+    const resizeWindow = () => {
+      setWindowWidth(window.innerWidth);
+    }
+    
+    window.addEventListener('resize', resizeWindow) 
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, [windowWidth]);
 
   const openPopup = () => {
     document.querySelector('.header__popup').classList.add('header__popup-opened');
@@ -44,8 +47,8 @@ function Header({ isLoggedIn }) {
           <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
             <div className='header__nav-movies'>
-              <Link className='header__link' to='/movies'>Фильмы</Link>
-              <Link className='header__link' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className={pathname === '/movies' ? 'header__link header__link-active-true' : 'header__link'} to='/movies'>Фильмы</Link>
+              <Link className={pathname === '/saved-movies' ? 'header__link header__link-active-true' : 'header__link'} to='/saved-movies'>Сохранённые фильмы</Link>
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>

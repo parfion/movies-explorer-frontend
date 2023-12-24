@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Preloader from '../Preloader/Preloader';
 
-function Profile ({editUser, logout}) {
+function Profile ({ editUser, logout, messageEditUser, isLoading }) {
   
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState();
@@ -82,6 +82,7 @@ function Profile ({editUser, logout}) {
                 minLength={2} 
                 maxLength={80}
                 required 
+                disabled={isLoading}
               />
             </div>
             <div className='profile__info-email'>
@@ -94,10 +95,13 @@ function Profile ({editUser, logout}) {
                 minLength={6}
                 maxLength={80} 
                 required 
+                disabled={isLoading}
               />
             </div>
+            <span className='register__form-error profile__measage'>{messageEditUser}</span>
           </div>
-          <button className='profile__edit' onClick={handleEdit} disabled={!disabledSubmit}>Редактировать</button>
+          
+          <button className='profile__edit' onClick={handleEdit} disabled={!disabledSubmit || isLoading}>Редактировать</button>
           <Link className='profile__exit' to='/' onClick={handleLogout}>Выйти из аккаунта</Link>
         </div>}
       </form>

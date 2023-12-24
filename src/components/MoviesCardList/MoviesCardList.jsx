@@ -1,8 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 import { useEffect, useState } from 'react';
+import {
+  WINDOW_SIZE_DESKTOP,
+  WINDOW_SIZE_TABLET,
+  MOVIES_ROW_DESKTOP,
+  MOVIES_ROW_TABLET,
+  MOVIES_ROW_MOBILE,
+  MOVIES_LINE_DESKTOP,
+  MOVIES_LINE_MOBILE
+} from '../../constants/constants';
 
 function MoviesCardList ({
   isLoading, 
@@ -22,18 +32,21 @@ function MoviesCardList ({
       setWindowWidth(window.innerWidth);
     }
 
-    if (windowWidth >= 1200) {
-      setFoundMovies(16);
-      setMoreMovies(4)
+    if (pathname === '/movies' && windowWidth >= WINDOW_SIZE_DESKTOP) {
+      setFoundMovies(MOVIES_ROW_DESKTOP);
+      setMoreMovies(MOVIES_LINE_DESKTOP)
     }
-    else if (windowWidth >= 730){
-      setFoundMovies(12);
-      setMoreMovies(4)
+    else if (pathname === '/movies' && windowWidth >= WINDOW_SIZE_TABLET) {
+      setFoundMovies(MOVIES_ROW_TABLET);
+      setMoreMovies(MOVIES_LINE_MOBILE)
     }
-    else if (windowWidth < 730){
-      setFoundMovies(5);
-      setMoreMovies(1)
+    else if (pathname === '/movies' && windowWidth < WINDOW_SIZE_TABLET) {
+      setFoundMovies(MOVIES_ROW_MOBILE);
+      setMoreMovies(MOVIES_LINE_MOBILE)
     } 
+    else if (pathname === '/saved-movies') {
+      setFoundMovies(cards?.length)
+    }
     window.addEventListener('resize', resizeWindow) 
     return () => window.removeEventListener("resize", resizeWindow);
   }, [windowWidth, cards]);

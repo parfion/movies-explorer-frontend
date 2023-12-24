@@ -14,8 +14,9 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import * as auth from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { SHORT_MOVIE_DURATION } from '../../constants/constants'
 
 function App() {
 
@@ -29,15 +30,18 @@ function App() {
   const [notFound, setNotFound] = useState('');
   const [shortMovies, setShortMovies] = useState(JSON.parse(localStorage.getItem('searchMovies')) || []);
   const [activeCheckbox, setActiveCheckbox] = useState(JSON.parse(localStorage.getItem('checkbox')));
+  const [activeCheckboxSavedMovies, setActiveCheckboxSavedMovies] = useState(false);
   const [savedMovie, setSavedMovie] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
   const [isLiked, setIsLiked] = useState(false);
   const [searchSavedMovies, setSearchSavedMovies] = useState([]);
   const [shownSavedMovies, setShownSavedMovies] = useState(false);
+  const [messageEditUser, setMessageEditUser] = useState('');
   const [errorMessageRegister, setErrorMessageRegister] = useState('');
   const [errorMessageLogin, setErrorMessageLogin] = useState('');
 
   // регистрация
   const onRegister = (name, email, password) => {
+    setIsLoading(true);
     auth
       .register(name, email, password)
       .then((data) => {
@@ -46,11 +50,13 @@ function App() {
       })
       .catch((err) => {
         setErrorMessageRegister('Такой пользователь уже существует');
-      });
+      })
+      .finally(() => setIsLoading(false))
   };
 
   // авторизация
   const onLogin = (email, password) => { 
+    setIsLoading(true);
     auth
       .login(email, password)
       .then(data => {
@@ -63,7 +69,8 @@ function App() {
       })
       .catch((err) => {
         setErrorMessageLogin('Такого пользователя не существует');
-      });
+      })
+      .finally(() => setIsLoading(false))
   };
 
   // проверка токена
@@ -93,12 +100,17 @@ function App() {
 
   // редактирование пользователя
   const editUser = (dataUser) => {
+    setIsLoading(true);
     auth
       .editUser(dataUser)
       .then((newDataUser) => {
         setCurrentUser(newDataUser);
       })
+      .then(() => {
+        setMessageEditUser('Данные пользователя отредактированы');
+      })
       .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false))
   };
 
   // получение сохраненных фильмов
@@ -112,8 +124,6 @@ function App() {
     .catch((err) => console.log(err));
   };
 
-  
-
   // выход из аккаунта 
   const logout = () => {
     setIsLoggedIn(false);
@@ -126,6 +136,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('searchName');
     localStorage.removeItem('savedMovies');
+    localStorage.removeItem('allMovies');
   };
 
   if (localStorage.getItem('token')) {
@@ -134,20 +145,29 @@ function App() {
 
   useEffect(() => {
     setShownSavedMovies(false);
+    setErrorMessageLogin('');
+    setErrorMessageRegister('');
+    setMessageEditUser('');
+    localStorage.removeItem('savedSearchMovies');
   }, [pathname]);
 
   useEffect(() => {
     localStorage.setItem('searchMovies', JSON.stringify(shortMovies));
   }, [shortMovies]);
 
+
   // изменение состояния чекбокса
   const handleCheckbox = () => {
     setActiveCheckbox(!activeCheckbox);
   };
 
+  const handleCheckboxSavedMovies = () => {
+    setActiveCheckboxSavedMovies(!activeCheckboxSavedMovies);
+  }
+
   // фильтр коротких фильмов
   const filterShortMovies = (movies) => {
-    return movies.filter((movie) => movie.duration <= 40);
+    return movies.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
   }
 
   // отрисовка фильмов, в зависимости от 
@@ -162,7 +182,7 @@ function App() {
       } 
     } 
     else if (pathname === '/saved-movies') {
-      if (activeCheckbox) {
+      if (activeCheckboxSavedMovies) {
         setSavedMovie(filterShortMovies(!shownSavedMovies 
           ? JSON.parse(localStorage.getItem('savedMovies')) 
           : searchSavedMovies));
@@ -173,36 +193,57 @@ function App() {
           : searchSavedMovies);
       } 
     }
-  }, [activeCheckbox, pathname, searchSavedMovies, shortMovies, shownSavedMovies]);
+  }, [activeCheckbox, activeCheckboxSavedMovies, pathname, searchSavedMovies, shortMovies, shownSavedMovies]);
 
    // поиск по базе фильмов
    const handleSearchMovies = (searchName) => {
-    moviesApi
-      .getMovies()
-      .then((movies) => {
-        const mineSearchMovies = movies.filter(
-          (movie) =>
-            movie.nameRU
+    setIsLoading(true);
+    const allMoviesFromLS = JSON.parse(localStorage.getItem('allMovies'));
+    if (!allMoviesFromLS) {
+      moviesApi
+        .getMovies()
+        .then((movies) => {
+          localStorage.setItem('allMovies', JSON.stringify(movies))
+          const mineSearchMovies = movies.filter(
+            (movie) =>
+              movie.nameRU
+                .toLowerCase()
+                .includes(searchName.toLowerCase()) ||
+              movie.nameEN
               .toLowerCase()
-              .includes(searchName.toLowerCase()) ||
-            movie.nameEN
-            .toLowerCase()
-            .includes(searchName.toLowerCase())
-          );
-          setShortMovies(mineSearchMovies);
-          setSearchMovies(shortMovies);
-          saveData(searchName, mineSearchMovies);
-          ((mineSearchMovies.length > 0) ? setNotFound('found') : setNotFound('notFound'));
+              .includes(searchName.toLowerCase())
+            );
+            setShortMovies(mineSearchMovies);
+            setSearchMovies(shortMovies);
+            saveData(searchName, mineSearchMovies);
+            ((mineSearchMovies.length > 0) ? setNotFound('found') : setNotFound('notFound'));
+          })
+        .catch((err) => {
+        console.log(err, `Во время запроса произошла ошибка. 
+        Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`)
         })
-      .catch((err) => {
-      console.log(err, `Во время запроса произошла ошибка. 
-      Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`)
-      })
-      .finally(() => {setIsLoading(false); });
+        .finally(() => {setIsLoading(false); }); }
+    else {
+      console.log(2)
+      const mineSearchMovies = allMoviesFromLS.filter(
+        (movie) =>
+          movie.nameRU
+            .toLowerCase()
+            .includes(searchName.toLowerCase()) ||
+          movie.nameEN
+          .toLowerCase()
+          .includes(searchName.toLowerCase())
+        );
+        setShortMovies(mineSearchMovies);
+        setSearchMovies(shortMovies);
+        saveData(searchName, mineSearchMovies);
+        ((mineSearchMovies.length > 0) ? setNotFound('found') : setNotFound('notFound'));
+        setIsLoading(false);
+    }
   };
-
+  
   // поиск сохраненных фильмов 
-  const handleSearcSavedMovies = (searchName) => {
+  const handleSearchSavedMovies = (searchName) => {
     setShownSavedMovies(true);
     setIsLoading(true);
     const mineSavedSearchMovies = JSON.parse(localStorage.getItem('savedMovies')).filter(
@@ -215,6 +256,7 @@ function App() {
         .includes(searchName.toLowerCase())
       );
       setSearchSavedMovies(mineSavedSearchMovies);
+      localStorage.setItem('savedSearchMovies', JSON.stringify(mineSavedSearchMovies));
       setIsLoading(false);
       mineSavedSearchMovies.length > 0 ? setNotFound('found') : setNotFound('notFound');
   };
@@ -241,19 +283,41 @@ function App() {
 
   // удаление фильма 
   const deleteMovie = (movie) => {
-    const savedLocalStorageMovies = JSON.parse(localStorage.getItem('savedMovies'));
-    const foundMovie = savedLocalStorageMovies.find((item) => item.movieId === movie.movieId);
-    if (foundMovie) {
-    auth
-    .deleteMovie(foundMovie._id)
-    .then((deletedMovie) => {
-      const index = savedLocalStorageMovies.indexOf(foundMovie);
-      savedLocalStorageMovies.splice(index, 1);
-      localStorage.setItem('savedMovies', JSON.stringify(savedLocalStorageMovies));
-      setSavedMovie(savedLocalStorageMovies);
-    })
-    .catch((err) => console.log(err)) }
-  }
+    if (localStorage.getItem('savedSearchMovies')) {
+      const localStorageMovies = JSON.parse(localStorage.getItem('savedSearchMovies'));
+      const foundMovie = (localStorageMovies).find((item) => item.movieId === movie.movieId);
+
+      const localStorageSavedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+      const foundSavedMovie = localStorageSavedMovies.find((item) => item.movieId === movie.movieId);
+      if (foundMovie) {
+      auth
+      .deleteMovie(foundMovie._id)
+      .then((deletedMovie) => {
+        const index = localStorageMovies.indexOf(foundMovie);
+        localStorageMovies.splice(index, 1);
+        localStorage.setItem('savedSearchMovies', JSON.stringify(localStorageMovies));
+
+        const indexSavedMovie = localStorageSavedMovies.indexOf(foundSavedMovie);
+        localStorageSavedMovies.splice(indexSavedMovie, 1);
+        localStorage.setItem('savedMovies', JSON.stringify(localStorageSavedMovies));
+        setSavedMovie(localStorageMovies);
+      })
+      .catch((err) => console.log(err)) }
+    }
+    else {
+      const localStorageMovies = JSON.parse(localStorage.getItem('savedMovies'));
+      const foundMovie = (localStorageMovies).find((item) => item.movieId === movie.movieId);
+      if (foundMovie) {
+      auth
+      .deleteMovie(foundMovie._id)
+      .then((deletedMovie) => {
+        const index = localStorageMovies.indexOf(foundMovie);
+        localStorageMovies.splice(index, 1);
+        localStorage.setItem('savedMovies', JSON.stringify(localStorageMovies));
+        setSavedMovie(localStorageMovies);
+      })
+      .catch((err) => console.log(err)) } }
+  };
 
   return (
     <div className="app">
@@ -265,18 +329,20 @@ function App() {
 
           <Route 
             path="/signin" 
-            element={<Login 
+            element={!isLoggedIn ? <Login 
             onLogin={onLogin} 
             errorMessage={errorMessageLogin}
-          />
-          } />
+            isLoading={isLoading}
+          /> : <Navigate to="/movies" replace />
+        } />
 
           <Route 
             path="/signup" 
-            element={<Register 
+            element={!isLoggedIn ? <Register 
             onRegister={onRegister} 
             errorMessage={errorMessageRegister}
-          />
+            isLoading={isLoading}
+          /> : <Navigate to="/movies" replace />
           } />
           
           <Route path="/movies" element={
@@ -300,10 +366,10 @@ function App() {
               element={SavedMovies} 
               movies={savedMovie}
               isLoading={isLoading} 
-              activeCheckbox={activeCheckbox} 
-              handleCheckbox={handleCheckbox} 
+              activeCheckbox={activeCheckboxSavedMovies} 
+              handleCheckbox={handleCheckboxSavedMovies} 
               handleSearchMovie={handleSearchMovies}
-              handleSearcSavedMovies={handleSearcSavedMovies}
+              handleSearcSavedMovies={handleSearchSavedMovies}
               notFound={notFound}
               deleteMovie={deleteMovie}
             />
@@ -314,6 +380,8 @@ function App() {
               element={Profile} 
               logout={logout}
               editUser={editUser}
+              messageEditUser={messageEditUser}
+              isLoading={isLoading}
             /> 
           } />
           
@@ -324,6 +392,6 @@ function App() {
       </CurrentUserContext.Provider>
     </div>
   )
-}
+};
 
 export default App;

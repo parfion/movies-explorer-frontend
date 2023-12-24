@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
 
-function Register ({ onRegister, errorMessage }) {
+function Register ({ onRegister, errorMessage, isLoading }) {
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -50,6 +50,7 @@ function Register ({ onRegister, errorMessage }) {
                 type='text' 
                 placeholder='Имя'
                 value={name} 
+                disabled={isLoading}
                 {...register('name', {
                   required: 'Поле обязательно к заполнению',
                   minLength: {
@@ -73,6 +74,7 @@ function Register ({ onRegister, errorMessage }) {
                 type='email' 
                 placeholder='E-mail'
                 value={email}
+                disabled={isLoading}
                 {...register('email', {
                   required: 'Поле обязательно к заполнению',
                   minLength: {
@@ -101,6 +103,7 @@ function Register ({ onRegister, errorMessage }) {
               placeholder='Пароль' 
               autoComplete='off'
               value={password} 
+              disabled={isLoading}
               {...register('password', {
                 required: 'Поле обязательно к заполнению',
                 minLength: {
@@ -118,7 +121,7 @@ function Register ({ onRegister, errorMessage }) {
               errors?.password?.message || 'Что-то пошло не так...'}</p>}</div>
             </div>
             <span className='register__form-error'>{errorMessage}</span> 
-            <button className='register__form-submit' disabled={!isValid}>Зарегистрироваться</button>
+            <button className='register__form-submit' disabled={!isValid || isLoading}>Зарегистрироваться</button>
           </form>
           <p className='register__yet'>Уже зарегистрированы?
           <Link className='register__link' to='/signin'>Войти</Link></p>

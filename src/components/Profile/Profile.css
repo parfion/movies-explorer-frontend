@@ -108,6 +108,10 @@
   cursor: pointer;
 }
 
+.profile__measage {
+  color: royalblue;
+}
+
 @media screen and (max-width: 768px) {
   .profile {
     min-height: calc(100vh - 236px - 74px - 266px);
