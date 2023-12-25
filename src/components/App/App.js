@@ -131,6 +131,7 @@ function App() {
     setShortMovies([]);
     setSavedMovie([]);
     setActiveCheckbox(null);
+    setActiveCheckboxSavedMovies(false);
     localStorage.removeItem('checkbox');
     localStorage.removeItem('searchMovies');
     localStorage.removeItem('token');
@@ -195,6 +196,18 @@ function App() {
     }
   }, [activeCheckbox, activeCheckboxSavedMovies, pathname, searchSavedMovies, shortMovies, shownSavedMovies]);
 
+  // отрисовка фильмов после удаления
+  useEffect(() => {
+    if (pathname === '/saved-movies' && localStorage.getItem('savedSearchMovies'))
+      if (activeCheckboxSavedMovies) {
+        setSavedMovie(filterShortMovies(JSON.parse(localStorage.getItem('savedSearchMovies'))))
+      } 
+      else {
+        setSavedMovie(JSON.parse(localStorage.getItem('savedSearchMovies')))
+      } 
+    
+  }, [activeCheckboxSavedMovies])
+
    // поиск по базе фильмов
    const handleSearchMovies = (searchName) => {
     setIsLoading(true);
@@ -224,7 +237,6 @@ function App() {
         })
         .finally(() => {setIsLoading(false); }); }
     else {
-      console.log(2)
       const mineSearchMovies = allMoviesFromLS.filter(
         (movie) =>
           movie.nameRU
@@ -300,9 +312,11 @@ function App() {
         const indexSavedMovie = localStorageSavedMovies.indexOf(foundSavedMovie);
         localStorageSavedMovies.splice(indexSavedMovie, 1);
         localStorage.setItem('savedMovies', JSON.stringify(localStorageSavedMovies));
-        setSavedMovie(localStorageMovies);
+        if (activeCheckboxSavedMovies) {setSavedMovie(filterShortMovies(localStorageMovies))}
+        else {setSavedMovie(localStorageMovies)}
       })
-      .catch((err) => console.log(err)) }
+      .catch((err) => console.log(err))
+      }
     }
     else {
       const localStorageMovies = JSON.parse(localStorage.getItem('savedMovies'));
@@ -314,9 +328,12 @@ function App() {
         const index = localStorageMovies.indexOf(foundMovie);
         localStorageMovies.splice(index, 1);
         localStorage.setItem('savedMovies', JSON.stringify(localStorageMovies));
-        setSavedMovie(localStorageMovies);
+        if (activeCheckboxSavedMovies) {setSavedMovie(filterShortMovies(localStorageMovies))}
+        else {setSavedMovie(localStorageMovies)}
       })
-      .catch((err) => console.log(err)) } }
+      .catch((err) => console.log(err))
+      } 
+    }
   };
 
   return (
