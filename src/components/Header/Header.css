@@ -210,6 +210,11 @@
   margin: 0 auto;
 }
 
+.header__link-active-true {
+  padding-bottom: 4px;
+  border-bottom: 2px solid #fff;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding: 18px 30px;

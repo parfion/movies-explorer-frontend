@@ -2,6 +2,7 @@ import './Portfolio.css';
 import { Link } from 'react-router-dom';
 
 function Portfolio (params) {
+  
   return(
     <main>
       <section className='portfolio'>

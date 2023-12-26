@@ -70,6 +70,17 @@
   line-height: normal;
 }
 
+.profile__edit:hover {
+  opacity: .7;
+  transition: .2s ease;
+}
+
+.profile__edit:disabled {
+  cursor: auto;
+  opacity: .4;
+  transition: .2s ease;
+}
+
 .profile__exit {
   display: block;
   color: #EE3465;
@@ -79,9 +90,26 @@
   line-height: normal;
 }
 
+.profile__exit-cancel {
+  background-color: initial;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+}
+
 .profile__exit:hover {
   opacity: .7;
   transition: .2s ease;
+}
+
+.profile__exit:hover {
+  cursor: pointer;
+}
+
+.profile__measage {
+  color: royalblue;
 }
 
 @media screen and (max-width: 768px) {

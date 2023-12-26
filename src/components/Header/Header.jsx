@@ -1,37 +1,37 @@
 import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function Header(params) {
+function Header({ isLoggedIn }) {
+
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const resizeWindow = () => {
-    setWindowWidth(window.innerWidth);
-  };
-  
-  window.addEventListener('resize', resizeWindow);
+  const activeHeader = (pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies') && true;
 
-  const loggedOutHeader = () => pathname === '/';
-
-
-  const loggedInHeader = () => pathname === '/profile' || pathname === '/movies' || pathname === '/saved-movies';
+  useEffect(() => {
+    const resizeWindow = () => {
+      setWindowWidth(window.innerWidth);
+    }
+    
+    window.addEventListener('resize', resizeWindow) 
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, [windowWidth]);
 
   const openPopup = () => {
     document.querySelector('.header__popup').classList.add('header__popup-opened');
-    document.querySelector('.header__opacity').classList.add('header__opacity-opened')
-
+    document.querySelector('.header__opacity').classList.add('header__opacity-opened');
   }; 
 
   const closePopup = () => {
-    document.querySelector('.header__popup').classList.remove('header__popup-opened')
-    document.querySelector('.header__opacity').classList.remove('header__opacity-opened')
+    document.querySelector('.header__popup').classList.remove('header__popup-opened');
+    document.querySelector('.header__opacity').classList.remove('header__opacity-opened');
   };
 
   return (
     <>
-      { loggedOutHeader() && (
-      <header className='header'>
+      {(!localStorage.getItem('token') && pathname === '/') && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo' to='/'></Link>
           <nav className='header__nav'>
@@ -41,25 +41,25 @@ function Header(params) {
         </div>
       </header> )}
 
-      { loggedInHeader() && windowWidth > 768 && (
-      <header className='header header-signin'>
+      {(localStorage.getItem('token') && (activeHeader || pathname === '/')  && windowWidth > 768) && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
             <div className='header__nav-movies'>
-              <Link className='header__link' to='/movies'>Фильмы</Link>
-              <Link className='header__link' to='/saved-movies'>Сохранённые фильмы</Link>
+              <Link className={pathname === '/movies' ? 'header__link header__link-active-true' : 'header__link'} to='/movies'>Фильмы</Link>
+              <Link className={pathname === '/saved-movies' ? 'header__link header__link-active-true' : 'header__link'} to='/saved-movies'>Сохранённые фильмы</Link>
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
-                <div className='header__nav-img-admin'></div>
+                <div className={pathname === '/' ? 'header__nav-img' : 'header__nav-img-admin'}></div>
               </Link>
           </nav>
         </div>
       </header> )}
 
-      { loggedInHeader() && windowWidth <= 768 && (
-      <header className='header header-signin'>
+      { (localStorage.getItem('token') && activeHeader && windowWidth <= 768) && (
+      <header className={pathname === '/' ? 'header' : 'header header-signin'}>
         <div className='header__content'>
           <Link className='header__logo header__logo-admin' to='/'></Link>
           <nav className='header__nav-admin'>
@@ -69,7 +69,7 @@ function Header(params) {
             </div>
               <Link className='header__link header__link-account' to='/profile'>
                 <p className='header__nav-account'>Аккаунт</p>
-                <div className='header__nav-img'></div>
+                <div className={pathname === '/' ? 'header__nav-img' : 'header__nav-img-admin'}></div>
               </Link>
           </nav>
           <button className='header__menu-img' onClick={openPopup}></button>

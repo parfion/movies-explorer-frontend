@@ -1,6 +1,7 @@
-import './AboutProject.css'
+import './AboutProject.css';
 
 function AboutProject(params) {
+  
   return(
     <main>
       <section className="about-project">

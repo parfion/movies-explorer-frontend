@@ -1,20 +1,13 @@
 import '../Regiter/Register.css';
 import './Login.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-function Login (params) {
+function Login ({ onLogin, errorMessage, isLoading }) {
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const changeEmail = (e) => {
-    setEmail(e.target.value)
-  };
-
-  const changePassword = (e) => {
-    setPassword(e.target.value)
-  };
 
   const { 
     register, 
@@ -22,13 +15,24 @@ function Login (params) {
       errors, 
       isValid 
     }, 
-    handleSubmit, 
-    reset } = useForm({ mode: 'onBlur' });
+    watch,
 
-  const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
-    reset();
-  };
+  } = useForm({ mode: 'onChange' });
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    onLogin(email, password);
+  } 
+
+  useEffect(() => {
+    const subscription = watch(({emailLogin, passwordLogin}) => {
+      setEmail(emailLogin);
+      setPassword(passwordLogin);
+      return () => {
+        subscription.unsubscribe();
+      }
+    })
+  }, [watch]);
 
   return (
     <main>
@@ -36,38 +40,61 @@ function Login (params) {
         <div className='register__content'>
           <Link className='register__logo' to='/'></Link>
           <h1 className='register__greet'>Рады видеть!</h1>
-          <form className='register__form' onSubmit={handleSubmit(onSubmit)}>
+          <form className='register__form' onSubmit={handleSubmitForm}>
             <div>
               <p className='register__form-name'>E-mail</p>
-              <input className='register__form-data' type='email' placeholder='E-mail'
-              {...register('emailLogin', {
-                required: 'Поле обязательно к заполнению',
-                pattern: {
-                  value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/,
-                  message: 'Введите валидный e-mail'
-                },
-              })} value={email} onChange={changeEmail}/>
+              <input 
+                className='register__form-data' 
+                type='email' 
+                placeholder='E-mail' 
+                value={email}
+                disabled={isLoading}
+                {...register('emailLogin', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 6,
+                    message: 'Минимум 6 символов'
+                  },
+                  maxLength: {
+                    value: 80,
+                    message: 'Максимум 80 символов'
+                  },
+                  pattern: {
+                    value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/,
+                    message: 'Введите валидный e-mail'
+                  },
+                })}  
+              />
               <div className='register__span'>{errors?.emailLogin && <p className='register__form-error'>{
               errors?.emailLogin?.message || 'Что-то пошло не так...'}</p>}</div>
             </div>
+            
             <div>
               <p className='register__form-name'>Пароль</p>
-              <input className='register__form-data' type='password' placeholder='Пароль'
-              {...register('passwordLogin', {
-                required: 'Поле обязательно к заполнению',
-                minLength: {
-                  value: 6,
-                  message: 'Минимум 6 символов'
-                },
-                maxLength: {
-                  value: 50,
-                  message: 'Максимум 50 символов'
-                }
-              })} value={password} onChange={changePassword}/>
+              <input 
+                className='register__form-data' 
+                type='password' 
+                placeholder='Пароль' 
+                autoComplete='off'
+                value={password}
+                disabled={isLoading}
+                {...register('passwordLogin', {
+                  required: 'Поле обязательно к заполнению',
+                  minLength: {
+                    value: 6,
+                    message: 'Минимум 6 символов'
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: 'Максимум 50 символов'
+                  }
+                })}  
+              />
               <div className='register__span'>{errors?.passwordLogin && <p className='register__form-error'>{
               errors?.passwordLogin?.message || 'Что-то пошло не так...'}</p>}</div>
             </div>
-            <button className='register__form-submit register__form-submit-auth' type='submit' disabled={!isValid}>Войти</button>
+            <span className='register__form-error'>{errorMessage}</span>
+            <button className='register__form-submit register__form-submit-auth' disabled={!isValid || isLoading}>Войти</button>
           </form>
           <p className='register__yet'>Ещё не зарегистрированы?
           <Link className='register__link' to='/signup'>Регистрация</Link></p>
